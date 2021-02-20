@@ -1,0 +1,12 @@
+{
+  "name": "checkplant-test",
+  "displayName": "checkplant-test",
+  "expo": {
+    "name": "checkplant-test",
+    "slug": "checkplant-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
