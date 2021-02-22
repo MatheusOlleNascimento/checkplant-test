@@ -34,5 +34,27 @@ export default class databaseServices {
         }))
     }
 
+    static findAllSinc() {
+        return new Promise((resolve, reject) => db.transaction(tx => {
+            tx.executeSql(`select * from ${table} where sinc =0`, [], (_, { rows }) => {
+                resolve(rows)
+            }), (sqlError) => {
+                console.log(sqlError);
+            }}, (txError) => {
+            console.log(txError);
+        }))
+    }
+    
+    static updateAnnotation(id) {
+        return new Promise((resolve, reject) => db.transaction(tx => {
+            tx.executeSql(`update ${table} set sinc=1 where id=${id}`, [], (_, { row }) => {
+                resolve(row)
+            }), (sqlError) => {
+                console.log(sqlError);
+            }}, (txError) => {
+            console.log(txError);
+        }))
+    }
+
 
 }

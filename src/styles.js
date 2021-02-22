@@ -67,4 +67,18 @@ export default StyleSheet.create({
     color: "#8fa7b3",
   },
 
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 20,
+    alignItems: "center",
+    elevation: 5
+  },
+
 });
