@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location';
 import DatabaseServices from './services/databaseServices';
 import DatabaseInit from './database/databaseInit';
-import MapView, {
-  Callout,
-  Marker,
-  PROVIDER_GOOGLE,
-  Region,
-} from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import styles from './styles';
 import pointGreen from './assets/pointGreen.png';
 import pointGray from './assets/pointGray.png';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-//import api from './services/api';
+import AsyncStorage from '@react-native-community/async-storage';
+
+import api from './services/api';
 
 export default function App() {
   
@@ -37,9 +34,17 @@ export default function App() {
   const [Annotation, setAnnotation] = useState("");
 
   useEffect(() => {
+    createDatabase();
     getLocation();
-    getAnnotations();
   }, []);
+
+  async function createDatabase(){
+    const database = await AsyncStorage.getItem('DatabaseExist');
+    if(database != 'true'){
+      new DatabaseInit;
+      await AsyncStorage.setItem('DatabaseExist', 'true');}
+    getAnnotations();
+  };
 
   async function getLocation(){
     let { status } = await Location.requestPermissionsAsync();
@@ -58,9 +63,6 @@ export default function App() {
 
   async function getAnnotations(){
     const All = await DatabaseServices.findAll();
-    if (typeof All.length !== 'number'){
-      new DatabaseInit;
-    }
     setAnnotations(All._array);
   }
 
@@ -95,7 +97,9 @@ export default function App() {
 
   async function saveAnnotation(){
 
+    Keyboard.dismiss();
     Alert.alert("Sucesso","Anotação inserida!");
+    setAnnotation("");
 
     const location = await Location.getCurrentPositionAsync({});
     const date = getDateNow();

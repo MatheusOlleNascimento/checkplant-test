@@ -5,10 +5,10 @@ var db = null
 export default class DatabaseInit {
     
     constructor() {
-        db = DatabaseConnection.getConnection()
+        db = DatabaseConnection.getConnection();
         db.exec([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false
     );
-        this.InitDb()
+        this.InitDb();
     }
     InitDb() {
         var sql = [
@@ -28,7 +28,7 @@ export default class DatabaseInit {
             //     longitude,
             //     latitude,
             //     sinc,
-            //     date) values('ANOTAÇÃO B.D - MY HOME', -54.1189806, -31.3412984, 0, '2021-02-21 16:43:50');`,
+            //     date) values('MY HOME', -54.1189806, -31.3412984, 0, '2021-02-21 16:43:50');`,
         ];
 
         db.transaction(
