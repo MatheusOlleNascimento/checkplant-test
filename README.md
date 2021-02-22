@@ -23,7 +23,6 @@ expo start
 ```sh
 expo eject
 ```
-- Caso queira testar o aplicativo em seu dispositivo Android, será disponibilizado o APK neste [Link](https://drive.google.com/file/d/1ov4kFuYYatGi2Gs54dEqlPBegQRHUvh0/view?usp=sharing).
 
 ## Observações
 - Este projeto e todo seu conteúdo visual é de posse da empresa [Checkplant](https://www.checkplant.com.br/).
